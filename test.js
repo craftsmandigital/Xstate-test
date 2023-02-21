@@ -22,9 +22,11 @@ const handWashMachine1 = Machine({
       on: {
         STOP_WASH: {
           target: "washed",
+          actions: 'writeTrans', //string representing action
         },
         START_SOAPING: {
           target: "Soaping",
+          actions: 'writeTrans', //string representing action
           // cond: "dirty",
         },
       },
@@ -38,6 +40,7 @@ const handWashMachine1 = Machine({
       on: {
         STOP_SOAPING: {
           target: "washing",
+          actions: 'writeTrans', //string representing action
         },
       },
     },
@@ -50,6 +53,10 @@ const handWashMachine1 = Machine({
     actions: {
       logEntry: (context, event, meta) => {
         console.log(`Entering state: ${meta.state.value}`);
+      },
+
+      writeTrans: (context, event, meta) => {
+        console.log(`going from one state to another in transition: ${event.type}`);
       }
     }
   });
